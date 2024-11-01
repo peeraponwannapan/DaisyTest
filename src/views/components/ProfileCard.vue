@@ -15,3 +15,18 @@
         </div>
     </div>
 </template>
+
+<script lang="ts">
+import useLiff from '@/hook/liff';
+import { onMounted } from 'vue';
+
+export default {
+    setup() {
+        const { liff, error } = useLiff();
+
+        onMounted(async () => {
+            console.log(liff, error);
+        });
+    }
+};
+</script>
