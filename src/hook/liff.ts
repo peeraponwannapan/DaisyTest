@@ -8,8 +8,7 @@ const useLiff = (
 
   liff
     .init({ liffId: liffId })
-    .then(result => {
-      console.log(result)
+    .then(async () => {
       liffInstance = liff
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
