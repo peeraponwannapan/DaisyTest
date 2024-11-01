@@ -25,6 +25,7 @@ export default {
         const profileStore = useProfileStore();
         const profile = ref(profileStore.profile);
         onMounted(async () => {
+            await profileStore.fetchProfile()
         });
 
         watch(() => profileStore.profile, (newProfile) => {
