@@ -31,7 +31,7 @@ export default {
             profile.value = newProfile;
             console.log('Profile updated:', newProfile); // ตรวจสอบค่าที่ถูกโหลด
         });
-        console.log(profileStore, profileStore.profile)
+        console.log(profile)
         return { profile };
     },
 };
