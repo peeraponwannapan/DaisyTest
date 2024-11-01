@@ -26,7 +26,7 @@ export default {
 
         onMounted(async () => {
             const profile = await liff?.value?.getProfile();
-            console.log(liff, profile, 'TEST', error);
+            console.log(liff?.value, profile, 'TEST', error);
         });
     }
 };
