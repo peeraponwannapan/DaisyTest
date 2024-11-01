@@ -18,20 +18,21 @@
 
 <script lang="ts">
 import { useProfileStore } from '@/stores/useProfileStore';
-import { onMounted, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 export default {
     setup() {
         const profileStore = useProfileStore();
-
+        const profile = ref(profileStore.profile);
         onMounted(async () => {
-            await profileStore.fetchProfile();
         });
+
         watch(() => profileStore.profile, (newProfile) => {
+            profile.value = newProfile;
             console.log('Profile updated:', newProfile); // ตรวจสอบค่าที่ถูกโหลด
         });
         console.log(profileStore, profileStore.profile)
-        return { profile: profileStore.profile, isLoading: profileStore.isLoading };
+        return { profile };
     },
 };
 </script>
