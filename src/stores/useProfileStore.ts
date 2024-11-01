@@ -15,7 +15,10 @@ export const useProfileStore = defineStore('profile', {
       this.isLoading = true
       const { liff } = await useLiff()
       try {
-        if (!liff) return
+        if (!liff) {
+          this.isLoading = false
+          return
+        }
         this.profile = await liff.getProfile()
       } catch (error) {
         console.error('Error fetching profile:', error)

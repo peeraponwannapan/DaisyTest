@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { useProfileStore } from '@/stores/useProfileStore';
-import { onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
 
 export default {
     setup() {
@@ -26,6 +26,9 @@ export default {
 
         onMounted(async () => {
             await profileStore.fetchProfile();
+        });
+        watch(() => profileStore.profile, (newProfile) => {
+            console.log('Profile updated:', newProfile); // ตรวจสอบค่าที่ถูกโหลด
         });
         console.log(profileStore, profileStore.profile)
         return { profile: profileStore.profile, isLoading: profileStore.isLoading };
