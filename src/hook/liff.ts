@@ -10,10 +10,11 @@ const useLiff = (
 
   liff
     .init({ liffId: liffId })
-    .then(() => {
+    .then(async () => {
       liffInstance.value = liff
       error.value = null
-      console.log(liff.getProfile())
+      const profile = await liff.getProfile()
+      console.log(profile, 'profile')
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
