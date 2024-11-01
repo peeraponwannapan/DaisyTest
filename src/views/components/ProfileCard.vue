@@ -27,7 +27,7 @@ export default {
         onMounted(async () => {
             await profileStore.fetchProfile();
         });
-        console.log(profileStore)
+        console.log(profileStore, profileStore.profile)
         return { profile: profileStore.profile, isLoading: profileStore.isLoading };
     },
 };
