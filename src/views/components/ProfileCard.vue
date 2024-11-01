@@ -3,11 +3,11 @@
         <div
             class="bg-gray-100 dark:bg-gray-700 relative shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl p-5 transition-all duration-500 transform">
             <div class="flex items-center gap-4">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwyfHxhdmF0YXJ8ZW58MHwwfHx8MTY5MTg0NzYxMHww&ixlib=rb-4.0.3&q=80&w=1080"
+                <img :src="profile?.pictureUrl"
                     class="w-32 group-hover:w-36 group-hover:h-36 h-32 object-center object-cover rounded-full transition-all duration-500 delay-500 transform" />
                 <div class="w-fit transition-all transform duration-500">
                     <h1 class="text-gray-600 dark:text-gray-200 font-bold">
-                        Mary Phiri
+                        {{ profile?.displayName || 'Loading...' }}
                     </h1>
                     <p class="text-gray-400">Senior Developer</p>
                 </div>
@@ -18,15 +18,22 @@
 
 <script lang="ts">
 import useLiff from '@/hook/liff';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
+interface Profile {
+    displayName: string;
+    pictureUrl?: string;
+    userId: string;
+}
 export default {
     setup() {
+        const profile = ref<Profile | null>(null);
         onMounted(async () => {
-            const connectLine = await useLiff();
-            const profile = await connectLine?.liff?.getProfile()
-            console.log(profile, 'profile', 'connect')
+            const { liff } = await useLiff();
+            const getProfile = await liff?.getProfile()
+            if (getProfile) profile.value = getProfile;
         });
+        return { profile };
     }
 };
 </script>
