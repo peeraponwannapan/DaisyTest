@@ -23,7 +23,7 @@ import { onMounted } from 'vue';
 export default {
     setup() {
         const { liff, error } = useLiff();
-        console.log(import.meta.env.VITE_LIFF_ID)
+        console.log(liff?.value?.getProfile())
         onMounted(async () => {
             console.log(liff, error);
         });
