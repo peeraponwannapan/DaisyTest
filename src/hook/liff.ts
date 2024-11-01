@@ -1,26 +1,22 @@
 import liff, { type Liff } from '@line/liff'
-import { ref } from 'vue'
-import type { Ref } from 'vue' // Type-only import
 
 const useLiff = (
   liffId = import.meta.env.VITE_LIFF_ID,
-): { liff: Ref<Liff | null>; error: Ref<Error | null> } => {
-  const error = ref<null>(null)
-  const liffInstance = ref<Liff | null>(null)
+): { liff: Liff | null; error: Error | null } => {
+  let error: Error | null = null
+  let liffInstance: Liff | null = null
 
   liff
     .init({ liffId: liffId })
-    .then(async () => {
-      liffInstance.value = liff
-      error.value = null
-      const profile = await liff.getProfile()
-      console.log(profile, 'profile')
+    .then(() => {
+      liffInstance = liff
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
     })
     .catch(err => {
       // Error happens during initialization
+      error = err
       console.log(err.code, err.message)
     })
 
