@@ -1,26 +1,26 @@
 import liff, { type Liff } from '@line/liff'
 
-const useLiff = (
+const useLiff = async (
   liffId = import.meta.env.VITE_LIFF_ID,
-): { liff: Liff | null; error: Error | null } => {
+): Promise<{ liff: Liff | null; error: Error | null }> => {
   let error: Error | null = null
   let liffInstance: Liff | null = null
 
-  liff
+  return liff
     .init({ liffId: liffId })
-    .then(async () => {
+    .then(() => {
       liffInstance = liff
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
+      return { liff: liffInstance, error }
     })
     .catch(err => {
-      // Error happens during initialization
+      // Handle error during initialization
       error = err
       console.log(err.code, err.message)
+      return { liff: null, error }
     })
-
-  return { liff: liffInstance, error }
 }
 
 export default useLiff
