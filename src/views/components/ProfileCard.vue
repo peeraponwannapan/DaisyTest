@@ -17,23 +17,18 @@
 </template>
 
 <script lang="ts">
-import useLiff from '@/hook/liff';
-import { onMounted, ref } from 'vue';
+import { useProfileStore } from '@/stores/useProfileStore';
+import { onMounted } from 'vue';
 
-interface Profile {
-    displayName: string;
-    pictureUrl?: string;
-    userId: string;
-}
 export default {
     setup() {
-        const profile = ref<Profile | null>(null);
+        const profileStore = useProfileStore();
+
         onMounted(async () => {
-            const { liff } = await useLiff();
-            const getProfile = await liff?.getProfile()
-            if (getProfile) profile.value = getProfile;
+            await profileStore.fetchProfile();
         });
-        return { profile };
-    }
+
+        return { profile: profileStore.profile, isLoading: profileStore.isLoading };
+    },
 };
 </script>
