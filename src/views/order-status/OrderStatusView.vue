@@ -14,12 +14,11 @@ import ProfileCard from '../components/ProfileCard.vue';
             <label
                 class="flex flex-col items-center bg-white/80 justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400">
                 <span class="text-gray-500">Choose a file or drag it here</span>
-                <input type="file" class="hidden" @change="handleFileUpload" />
+                <input type="file" class="hidden" />
             </label>
 
             <button
-                class="mt-4 w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none"
-                @click="submitFile">
+                class="mt-4 w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none">
                 ยืนยันการโอนเงิน
             </button>
 
