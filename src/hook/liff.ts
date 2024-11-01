@@ -7,7 +7,7 @@ const useLiff = (
 ): { liff: Ref<Liff | null>; error: Ref<Error | null> } => {
   const error = ref<null>(null)
   const liffInstance = ref<Liff | null>(null)
-  console.log(liffId)
+
   liff
     .init({ liffId: liffId })
     .then(() => {
