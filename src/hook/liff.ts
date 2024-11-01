@@ -17,7 +17,10 @@ const useLiff = (
         liff.login({ redirectUri: window.location.href })
       }
     })
-    .catch(err => (error.value = err))
+    .catch(err => {
+      // Error happens during initialization
+      console.log(err.code, err.message)
+    })
 
   return { liff: liffInstance, error }
 }
