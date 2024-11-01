@@ -13,6 +13,7 @@ const useLiff = (
     .then(() => {
       liffInstance.value = liff
       error.value = null
+      console.log(liff.getProfile())
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
