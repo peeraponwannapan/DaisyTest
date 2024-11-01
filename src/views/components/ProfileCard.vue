@@ -24,7 +24,7 @@ export default {
     setup() {
         onMounted(async () => {
             const connectLine = await useLiff();
-            const profile = connectLine?.liff?.getProfile
+            const profile = await connectLine?.liff?.getProfile()
             console.log(profile, 'profile', 'connect')
         });
     }
