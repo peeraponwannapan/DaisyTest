@@ -22,11 +22,11 @@ import { onMounted } from 'vue';
 
 export default {
     async setup() {
-        const { liff } = useLiff();
+        const { liff, error } = useLiff();
         const profile = liff?.value?.getProfile()
 
         onMounted(async () => {
-            console.log(liff, profile, 'TEST');
+            console.log(liff, profile, 'TEST', error);
         });
     }
 };
