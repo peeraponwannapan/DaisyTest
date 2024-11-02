@@ -86,7 +86,7 @@ import { useProfileStore } from '@/stores/useProfileStore';
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
 const profileStore = useProfileStore();
-console.log(profileStore, 'profileStore')
+console.log(profileStore.profile, 'profileStore')
 
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
