@@ -23,7 +23,6 @@ import { onMounted } from 'vue';
 export default {
     setup() {
         const profileStore = useProfileStore();
-        // const profile = ref(profileStore.profile);
         onMounted(async () => {
             await profileStore.fetchProfile()
         });

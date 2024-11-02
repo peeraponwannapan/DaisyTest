@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-3xl flex flex-col justify-between mx-auto">
+    <ProfileCard />
     <div class="grid grid-cols-3 gap-4">
       <div v-for="(item, index) in productRef" :key="index"
         :class="['cursor-pointer', 'hover:bg-[#d9f2fa]', 'bg-opacity-75', 'rounded-[35px]', 'flex', 'flex-col', 'items-center', 'justify-center', 'md:h-52', 'md:w-52', { 'hovered': selectedItem === item }]"
@@ -49,8 +50,6 @@
     </div>
   </div>
 
-
-
 </template>
 
 <style>
@@ -81,10 +80,13 @@ import { backEndApi } from '@/services/axios';
 import { onMounted, ref } from 'vue';
 import type { Product } from './product/types';
 import router from '@/router';
+import ProfileCard from './components/ProfileCard.vue';
+import { useProfileStore } from '@/stores/useProfileStore';
 
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
-
+const profileStore = useProfileStore();
+console.log(profileStore, 'profileStore')
 
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
