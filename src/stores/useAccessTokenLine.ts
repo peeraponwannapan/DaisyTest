@@ -16,8 +16,7 @@ export const accessTokenStore = defineStore('accessToken', {
           this.isLoading = false
           return
         }
-        console.log(liff.getAccessToken(), 'CHeCK')
-        this.accessToken = liff.getAccessToken() || ''
+        this.accessToken = liff.getIDToken() || ''
         this.expiresAt = Date.now() + 55 * 60 * 1000
       } catch (error) {
         console.error('Error fetching profile:', error)

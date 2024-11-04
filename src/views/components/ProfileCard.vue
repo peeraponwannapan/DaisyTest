@@ -26,11 +26,11 @@ export default {
         const profileStore = useProfileStore();
         const accessToken = accessTokenStore();
         onMounted(async () => {
+            await profileStore.fetchProfile()
             if (accessToken.isTokenExpired()) {
                 console.log('Token has expired')
                 await accessToken.clearToken()
             }
-            await profileStore.fetchProfile()
             await accessToken.getIDToken()
         });
 
