@@ -4,7 +4,7 @@ import ProfileCard from './components/ProfileCard.vue';
 </script>
 
 <template>
-  <div class="max-w-3xl flex flex-col ">
+  <div class="max-w-3xl flex flex-col h-[690px]">
     <ProfileCard />
     <div class="grid grid-cols-3 gap-4">
       <router-link :to="{ name: 'product', params: { id: 1 } }"

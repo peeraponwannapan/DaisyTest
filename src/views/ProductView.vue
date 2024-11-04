@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-3xl flex flex-col justify-between mx-auto">
+  <div class="max-w-3xl flex flex-col h-[690px]">
     <ProfileCard />
     <div class="grid grid-cols-3 gap-4">
       <div v-for="(item, index) in productRef" :key="index"
@@ -9,6 +9,7 @@
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/640px-LINE_logo.svg.png">
         <span class="priceText">{{ item.price }} bath / {{ item.expiredDate }} days</span>
       </div>
+
       <div
         class="cursor-pointer hover:bg-[#d9f2fa] bg-opacity-75 rounded-[35px] flex flex-col items-center justify-center md:h-52 md:w-52">
         <img class="md:h-28 md:w-28 sm:h-20 sm:w-20"
