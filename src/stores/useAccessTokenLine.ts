@@ -16,6 +16,7 @@ export const accessTokenStore = defineStore('accessToken', {
           this.isLoading = false
           return
         }
+        console.log(liff.getIDToken(), 'CHeCK')
         this.accessToken = liff.getIDToken() || ''
         this.expiresAt = Date.now() + 55 * 60 * 1000
       } catch (error) {
