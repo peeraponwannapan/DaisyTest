@@ -87,6 +87,7 @@ import { accessTokenStore } from '@/stores/useAccessTokenLine';
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
 const getAccessToken = accessTokenStore();
+console.log(getAccessToken.accessToken)
 
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
