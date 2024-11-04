@@ -17,15 +17,19 @@
 </template>
 
 <script lang="ts">
+import { accessTokenStore } from '@/stores/useAccessTokenLine';
 import { useProfileStore } from '@/stores/useProfileStore';
 import { onMounted } from 'vue';
 
 export default {
     setup() {
         const profileStore = useProfileStore();
+        const accessToken = accessTokenStore();
+        console.log(accessToken)
         onMounted(async () => {
             await profileStore.fetchProfile()
-            await profileStore.getIDToken()
+            await accessToken.getIDToken()
+
         });
 
         return { profileStore };

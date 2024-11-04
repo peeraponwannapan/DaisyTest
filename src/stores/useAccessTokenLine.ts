@@ -1,17 +1,13 @@
 import useLiff from '@/hook/liff'
 import { defineStore } from 'pinia'
 
-export const useProfileStore = defineStore('profile', {
+export const accessTokenStore = defineStore('accessToken', {
   state: () => ({
-    profile: null as {
-      displayName: string
-      pictureUrl?: string
-      userId: string
-    } | null,
+    accessToken: '',
     isLoading: false,
   }),
   actions: {
-    async fetchProfile() {
+    async getIDToken() {
       this.isLoading = true
       const { liff } = await useLiff()
       try {
@@ -19,7 +15,7 @@ export const useProfileStore = defineStore('profile', {
           this.isLoading = false
           return
         }
-        this.profile = await liff.getProfile()
+        this.accessToken = liff.getIDToken() || ''
       } catch (error) {
         console.error('Error fetching profile:', error)
       } finally {
