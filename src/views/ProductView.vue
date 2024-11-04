@@ -82,23 +82,27 @@ import { onMounted, ref } from 'vue';
 import type { Product } from './product/types';
 import router from '@/router';
 import ProfileCard from './components/ProfileCard.vue';
-import { useProfileStore } from '@/stores/useProfileStore';
 import { accessTokenStore } from '@/stores/useAccessTokenLine';
 
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
-const profileStore = useProfileStore();
 const getAccessToken = accessTokenStore();
-console.log(profileStore.profile, 'profileStore')
-console.log(getAccessToken.accessToken, 'profileStore')
 
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
   productRef.value = product
+  if (getAccessToken.isTokenExpired()) {
+    console.log('Token has expired')
+    getAccessToken.clearToken()
+  }
 })
 
 const purchaseButton = async (productId: number) => {
-  const { data: response } = await backEndApi.post(`/orders`, { productId })
+  const { data: response } = await backEndApi.post(`/orders`, { productId }, {
+    headers: {
+      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJhMmZkNTE4MTY5MmNjNmRhZjc5OTkwNWQwZGNkN2IwODI2YjQ1OGM5ZmU3OTRiOTA1NmZjN2I0ZGI2MWNmYmE0IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMDc0NDM1NywiaWF0IjoxNzMwNzQwNzU3LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTm52VG5hWHBiTjNxajRnOFdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.1b4zZcsw56FyHTgkTZVAebupBj7FQrrXJjZO38cJ7Naealc2dGPIK2ZtmVvbf1FLPELIUj8xmBPRXAagJST0tw"} `,
+    }
+  })
   if (response) {
     router.push(`/order-status/${response.refId}`)
   }

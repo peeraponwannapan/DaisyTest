@@ -5,6 +5,7 @@ export const accessTokenStore = defineStore('accessToken', {
   state: () => ({
     accessToken: '',
     isLoading: false,
+    expiresAt: null as number | null,
   }),
   actions: {
     async getIDToken() {
@@ -16,11 +17,20 @@ export const accessTokenStore = defineStore('accessToken', {
           return
         }
         this.accessToken = liff.getIDToken() || ''
+        this.expiresAt = Date.now() + 55 * 60 * 1000
       } catch (error) {
         console.error('Error fetching profile:', error)
       } finally {
         this.isLoading = false
       }
+    },
+    isTokenExpired() {
+      // ตรวจสอบว่ามีเวลาหมดอายุและถึงเวลาหมดอายุหรือยัง
+      return this.expiresAt ? Date.now() >= this.expiresAt : true
+    },
+    clearToken() {
+      this.accessToken = ''
+      this.expiresAt = null
     },
   },
 })
