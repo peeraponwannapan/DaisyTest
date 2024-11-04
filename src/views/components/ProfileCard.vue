@@ -28,7 +28,7 @@ export default {
         onMounted(async () => {
             if (accessToken.isTokenExpired()) {
                 console.log('Token has expired')
-                accessToken.clearToken()
+                await accessToken.clearToken()
             }
             await profileStore.fetchProfile()
             await accessToken.getIDToken()

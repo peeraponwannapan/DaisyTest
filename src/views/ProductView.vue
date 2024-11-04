@@ -97,7 +97,7 @@ onMounted(async () => {
 const purchaseButton = async (productId: number) => {
   const { data: response } = await backEndApi.post(`/orders`, { productId }, {
     headers: {
-      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJhMmZkNTE4MTY5MmNjNmRhZjc5OTkwNWQwZGNkN2IwODI2YjQ1OGM5ZmU3OTRiOTA1NmZjN2I0ZGI2MWNmYmE0IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMDc0NDM1NywiaWF0IjoxNzMwNzQwNzU3LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTm52VG5hWHBiTjNxajRnOFdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.1b4zZcsw56FyHTgkTZVAebupBj7FQrrXJjZO38cJ7Naealc2dGPIK2ZtmVvbf1FLPELIUj8xmBPRXAagJST0tw"} `,
+      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJhbGciOiJIUzI1NiJ9.AR3YND0lDKmiu6HpZ6lGl35CRaTrwMgzhVTrA9b3yv2w4zdP9ba5N5nKrGSv_9_rp_f12Qu5u7mYhJ2QY6__9WjcUuBs7DXlmaoBeHZvpfHCU-4EoWtRM5IOe0cqNS8jvrbOXsWdjqbojnHyoqNegWcJXns_V6UvP8OyI4T5i9c.VtmCNO4YR-YQ3YizJZ7lgrR2T323XvLSzw9fi32w4QM"} `,
     }
   })
   if (response) {

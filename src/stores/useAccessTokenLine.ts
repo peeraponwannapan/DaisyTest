@@ -29,7 +29,9 @@ export const accessTokenStore = defineStore('accessToken', {
       // ตรวจสอบว่ามีเวลาหมดอายุและถึงเวลาหมดอายุหรือยัง
       return this.expiresAt ? Date.now() >= this.expiresAt : true
     },
-    clearToken() {
+    async clearToken() {
+      const { liff } = await useLiff()
+      liff?.logout()
       this.accessToken = ''
       this.expiresAt = null
     },
