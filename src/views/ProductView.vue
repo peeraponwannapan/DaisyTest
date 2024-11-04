@@ -86,17 +86,12 @@ import { accessTokenStore } from '@/stores/useAccessTokenLine';
 
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
-const getAccessToken = accessTokenStore();
-console.log(getAccessToken.accessToken)
+const getAccessToken = await accessTokenStore();
+console.log(getAccessToken.accessToken, "Token")
 
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
   productRef.value = product
-  console.log(getAccessToken.accessToken, "Token")
-  if (getAccessToken.isTokenExpired()) {
-    console.log('Token has expired')
-    getAccessToken.clearToken()
-  }
 })
 
 const purchaseButton = async (productId: number) => {
