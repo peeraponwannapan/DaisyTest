@@ -91,6 +91,7 @@ const getAccessToken = accessTokenStore();
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
   productRef.value = product
+  console.log(getAccessToken.accessToken)
   if (getAccessToken.isTokenExpired()) {
     console.log('Token has expired')
     getAccessToken.clearToken()
