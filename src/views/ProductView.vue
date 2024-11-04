@@ -86,7 +86,7 @@ import { accessTokenStore } from '@/stores/useAccessTokenLine';
 
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
-const getAccessToken = await accessTokenStore();
+const getAccessToken = accessTokenStore();
 console.log(getAccessToken.accessToken, "Token")
 
 onMounted(async () => {
