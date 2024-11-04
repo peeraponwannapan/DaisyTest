@@ -25,7 +25,6 @@ export default {
     setup() {
         const profileStore = useProfileStore();
         const accessToken = accessTokenStore();
-        console.log(accessToken)
         onMounted(async () => {
             await profileStore.fetchProfile()
             await accessToken.getIDToken()
