@@ -9,6 +9,7 @@ export const useProfileStore = defineStore('profile', {
       userId: string
     } | null,
     isLoading: false,
+    accessToken: '',
   }),
   actions: {
     async fetchProfile() {
@@ -20,6 +21,21 @@ export const useProfileStore = defineStore('profile', {
           return
         }
         this.profile = await liff.getProfile()
+      } catch (error) {
+        console.error('Error fetching profile:', error)
+      } finally {
+        this.isLoading = false
+      }
+    },
+    async getIDToken() {
+      this.isLoading = true
+      const { liff } = await useLiff()
+      try {
+        if (!liff) {
+          this.isLoading = false
+          return
+        }
+        this.accessToken = liff.getIDToken() || ''
       } catch (error) {
         console.error('Error fetching profile:', error)
       } finally {

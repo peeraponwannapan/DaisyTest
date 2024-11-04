@@ -25,6 +25,7 @@ export default {
         const profileStore = useProfileStore();
         onMounted(async () => {
             await profileStore.fetchProfile()
+            await profileStore.getIDToken()
         });
 
         return { profileStore };
