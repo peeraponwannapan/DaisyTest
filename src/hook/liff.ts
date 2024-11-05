@@ -1,4 +1,7 @@
+import { backEndApi } from '@/services/axios'
 import liff, { type Liff } from '@line/liff'
+import { decodeJwt } from 'jose'
+import moment from 'moment'
 
 const useLiff = async (
   liffId = import.meta.env.VITE_LIFF_ID,
@@ -8,11 +11,27 @@ const useLiff = async (
 
   return liff
     .init({ liffId: liffId })
-    .then(() => {
+    .then(async () => {
       liffInstance = liff
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
+      const getTokenId = liff?.getIDToken() || ''
+      const decode = decodeJwt(getTokenId)
+      const dateToCheck = moment.unix(decode?.exp as number)
+      if (decode && !dateToCheck.isAfter(moment())) {
+        console.log(decode, dateToCheck)
+        liff.logout()
+      }
+      await backEndApi.post(
+        '/users/login-line',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${getTokenId} `,
+          },
+        },
+      )
       return { liff: liffInstance, error }
     })
     .catch(err => {

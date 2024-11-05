@@ -97,7 +97,7 @@ onMounted(async () => {
 const purchaseButton = async (productId: number) => {
   const { data: response } = await backEndApi.post(`/orders`, { productId }, {
     headers: {
-      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJhbGciOiJIUzI1NiJ9.AR3YND0lDKmiu6HpZ6lGl35CRaTrwMgzhVTrA9b3yv2w4zdP9ba5N5nKrGSv_9_rp_f12Qu5u7mYhJ2QY6__9WjcUuBs7DXlmaoBeHZvpfHCU-4EoWtRM5IOe0cqNS8jvrbOXsWdjqbojnHyoqNegWcJXns_V6UvP8OyI4T5i9c.VtmCNO4YR-YQ3YizJZ7lgrR2T323XvLSzw9fi32w4QM"} `,
+      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJjNmYzNGU4NjNkM2U1ZTMyYmEzMjA4MTQwMmQ4YjNlMTBlOGVkYjYzODU2OGE1N2IyNzE2YzBmMzBmNTY3MTAzIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMDgzMTI1NSwiaWF0IjoxNzMwODI3NjU1LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTm52VG5hWHBiTjNxajRnOFdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.flfaCcR1kBQC6CswBMl6MKWVAWAl5ALsCm-OzJZHussmBq9tFm-kCaBUlQb-miq4p3RuESMkeo1TQ74xCGsCMQ"} `,
     }
   })
   if (response) {
