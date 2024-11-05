@@ -23,16 +23,19 @@ const useLiff = async (
         console.log(decode, dateToCheck)
         liff.logout()
       }
-      await backEndApi.post(
-        '/users/login-line',
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${getTokenId} `,
+      try {
+        await backEndApi.post(
+          '/users/login-line',
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${getTokenId} `,
+            },
           },
-        },
-      )
-      return { liff: liffInstance, error }
+        )
+      } finally {
+        return { liff: liffInstance, error }
+      }
     })
     .catch(err => {
       // Handle error during initialization
