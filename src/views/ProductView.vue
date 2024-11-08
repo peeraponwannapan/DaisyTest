@@ -97,7 +97,7 @@ onMounted(async () => {
 const purchaseButton = async (productId: number) => {
   const { data: response } = await backEndApi.post(`/orders`, { productId }, {
     headers: {
-      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJjNmYzNGU4NjNkM2U1ZTMyYmEzMjA4MTQwMmQ4YjNlMTBlOGVkYjYzODU2OGE1N2IyNzE2YzBmMzBmNTY3MTAzIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMDgzMTI1NSwiaWF0IjoxNzMwODI3NjU1LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTm52VG5hWHBiTjNxajRnOFdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.flfaCcR1kBQC6CswBMl6MKWVAWAl5ALsCm-OzJZHussmBq9tFm-kCaBUlQb-miq4p3RuESMkeo1TQ74xCGsCMQ"} `,
+      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiI1Y2VlMzdlNjljMzUzNzY2YTNmZTAxZmEwNWJmODIxMjgzNTQxYTg0YTY2OTJjZGVkZGY5NDdkMGMwOTA0MzY3IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMDkyNDk0OCwiaWF0IjoxNzMwOTIxMzQ4LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTm52VG5hWHBiTjNxajRnOFdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.9ifz-3j2jesCgQE3px4oHEGUgA-griel45-cPU8ktizNwCYMYe55uWkKFSmLuifMO1sUlp45z_xfJ1IDTzjMJA"} `,
     }
   })
   if (response) {
