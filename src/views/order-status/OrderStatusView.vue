@@ -38,7 +38,7 @@ const submitForm = async () => {
             }
         })
 
-        if (response.ok) {
+        if (response) {
             alert('File uploaded successfully!')
         } else {
             alert('File upload failed.')
