@@ -79,7 +79,7 @@
 
 <script lang="ts" setup>
 import { backEndApi } from '@/services/axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { Product } from './product/types';
 import router from '@/router';
 import ProfileCard from './components/ProfileCard.vue';
@@ -89,10 +89,10 @@ const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
 const getAccessToken = accessTokenStore();
 
-// onMounted(async () => {
-//   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
-//   productRef.value = product
-// })
+onMounted(async () => {
+  const { data: product } = await backEndApi.get(`/apis/products/${1}`)
+  productRef.value = product
+})
 
 const purchaseButton = async (productId: number) => {
   const { data: response } = await backEndApi.post(`/orders`, { productId }, {
