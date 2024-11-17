@@ -34,7 +34,7 @@ const submitForm = async () => {
         // Replace 'YOUR_API_ENDPOINT' with the actual API URL
         const response = await backEndApi.post('/slips/verify', formData, {
             headers: {
-                Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiI1Y2VlMzdlNjljMzUzNzY2YTNmZTAxZmEwNWJmODIxMjgzNTQxYTg0YTY2OTJjZGVkZGY5NDdkMGMwOTA0MzY3IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMDkyNDk0OCwiaWF0IjoxNzMwOTIxMzQ4LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTm52VG5hWHBiTjNxajRnOFdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.9ifz-3j2jesCgQE3px4oHEGUgA-griel45-cPU8ktizNwCYMYe55uWkKFSmLuifMO1sUlp45z_xfJ1IDTzjMJA"} `,
+                Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiI5NWU5MTE5ZjY1M2VhZTA5NWJiM2Q4NzFkNmJhOGZmNDY0NjdhYTMxNDU3NWE0NTQzNjE1ZjA1MWQ0YjczNWE2IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMTE3ODcxMiwiaWF0IjoxNzMxMTc1MTEyLCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTmpQMzFhWHBiTjNnenk1SVdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.j9TA80h-GTwf4iWK8vbF-FCY8v_UGO6SW_j-ZYMrImYdmlCMv9OZwsrUQwG_dhR4h_rMeTqfUk_aOQ4k6iQvXA"} `,
             }
         })
 
@@ -59,7 +59,7 @@ const submitForm = async () => {
                 alt="">
         </div>
         <div class="grid grid-cols-1 gap-4 mt-6">
-            <img v-if="imageUrl" :src="imageUrl" alt="Preview Image" class="max-h-[30rem] object-contain" />
+            <img v-if="imageUrl" :src="imageUrl" alt="Preview Image" class="max-h-[30rem] mx-auto object-contain" />
             <label
                 class="flex flex-col items-center bg-white/80 justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400">
                 <span class="text-gray-500">Choose a file or drag it here</span>
