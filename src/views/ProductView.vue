@@ -10,25 +10,6 @@
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/640px-LINE_logo.svg.png">
           <span class="priceText">{{ item.price }} bath / {{ item.expiredDate }} days</span>
         </div>
-
-        <div
-          class="cursor-pointer hover:bg-[#d9f2fa] bg-opacity-75 rounded-[35px] flex flex-col items-center justify-center md:h-52 md:w-52">
-          <img class="md:h-28 md:w-28 sm:h-20 sm:w-20"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/640px-LINE_logo.svg.png">
-          <span class="priceText">40 bath / 7 days</span>
-        </div>
-        <div
-          class="cursor-pointer hover:bg-[#d9f2fa] bg-opacity-75 rounded-[35px] flex flex-col items-center justify-center md:h-52 md:w-52">
-          <img class="md:h-28 md:w-28 sm:h-20 sm:w-20"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/640px-LINE_logo.svg.png">
-          <span class="priceText">40 bath / 7 days</span>
-        </div>
-        <div
-          class="cursor-pointer hover:bg-[#d9f2fa] bg-opacity-75 rounded-[35px] flex flex-col items-center justify-center md:h-52 md:w-52">
-          <img class="md:h-28 md:w-28 sm:h-20 sm:w-20"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/640px-LINE_logo.svg.png">
-          <span class="priceText">40 bath / 7 days</span>
-        </div>
       </div>
       <div v-if="selectedItem" class="fixed bottom-0 left-0 right-0 mx-auto bg-white p-4 shadow-lg max-w-3xl">
         <div class="flex items-center justify-center font-bold text-lg mb-2">
@@ -83,11 +64,9 @@ import { onMounted, ref } from 'vue';
 import type { Product } from './product/types';
 import router from '@/router';
 import ProfileCard from './components/ProfileCard.vue';
-import { accessTokenStore } from '@/stores/useAccessTokenLine';
 
 const productRef = ref<Product[]>([]);
 const selectedItem = ref<Product | undefined>(undefined);
-const getAccessToken = accessTokenStore();
 
 onMounted(async () => {
   const { data: product } = await backEndApi.get(`/apis/products/${1}`)
@@ -95,11 +74,7 @@ onMounted(async () => {
 })
 
 const purchaseButton = async (productId: number) => {
-  const { data: response } = await backEndApi.post(`/orders`, { productId }, {
-    headers: {
-      Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJhNTI0YTQwNGU3YTk3ZDM1ZGM2NDYzMzc1NjMwNTUyNWVkMmRjNGE1YjQ4YTEzMDczNmY3NGU5YTNhNWQ0YjFkIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMTk1NzAxNywiaWF0IjoxNzMxOTUzNDE3LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTmpQMzFhWHBiTjNnenk1SVdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.Fu7X4L0LiZJl_2sLMR3S2IYFv-2Ptjlh7rKo81mW-lXRs1Fq_KnzbXX67wRujmQ8l18GUPxBbAsQzB3UIv9MKg"} `,
-    }
-  })
+  const { data: response } = await backEndApi.post(`/orders`, { productId })
   if (response) {
     router.push(`/order-status/${response.refId}`)
   }

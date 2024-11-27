@@ -4,14 +4,12 @@ import { useRoute } from 'vue-router'
 import ProfileCard from '../components/ProfileCard.vue';
 import { onMounted, ref } from 'vue';
 import { backEndApi } from '@/services/axios';
-import { accessTokenStore } from '@/stores/useAccessTokenLine';
 import type { Orders } from './types';
 
 const file = ref<File | null>(null)
 const imageUrl = ref<string | null>(null)
 const orderRef = ref<Orders>();
 const route = useRoute()
-const getAccessToken = accessTokenStore();
 const refId = route?.params?.refId as string
 const handleFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement
@@ -23,11 +21,7 @@ const handleFileChange = (event: Event) => {
 }
 
 const fetchOrders = async () => {
-    const { data: response } = await backEndApi.get(`/orders/${refId}`, {
-        headers: {
-            Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJhNTI0YTQwNGU3YTk3ZDM1ZGM2NDYzMzc1NjMwNTUyNWVkMmRjNGE1YjQ4YTEzMDczNmY3NGU5YTNhNWQ0YjFkIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMTk1NzAxNywiaWF0IjoxNzMxOTUzNDE3LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTmpQMzFhWHBiTjNnenk1SVdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.Fu7X4L0LiZJl_2sLMR3S2IYFv-2Ptjlh7rKo81mW-lXRs1Fq_KnzbXX67wRujmQ8l18GUPxBbAsQzB3UIv9MKg"}`,
-        }
-    })
+    const { data: response } = await backEndApi.get(`/orders/${refId}`)
     orderRef.value = response
 }
 
@@ -47,11 +41,7 @@ const submitForm = async () => {
 
     try {
         // Replace 'YOUR_API_ENDPOINT' with the actual API URL
-        const response = await backEndApi.post('/slips/verify', formData, {
-            headers: {
-                Authorization: `Bearer ${getAccessToken?.accessToken || "eyJraWQiOiJhNTI0YTQwNGU3YTk3ZDM1ZGM2NDYzMzc1NjMwNTUyNWVkMmRjNGE1YjQ4YTEzMDczNmY3NGU5YTNhNWQ0YjFkIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2FjY2Vzcy5saW5lLm1lIiwic3ViIjoiVTg5ODQ5NTkzNDgwOWU5MmFiNDlhNDY2MzRmYjJlZWI0IiwiYXVkIjoiMjAwNjUyNDEzOCIsImV4cCI6MTczMTk1NzAxNywiaWF0IjoxNzMxOTUzNDE3LCJhbXIiOlsibGluZXNzbyJdLCJuYW1lIjoi4bS54bSs4bS6IiwicGljdHVyZSI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoNlVmTmpQMzFhWHBiTjNnenk1SVdMV2R5Wnhjc0dXOHlJMWdnVEhnMk1oMGxWWHdzYjFJaFRDMWpOaDUyQnlsNVpnTjBIbmcxWTBrbCJ9.Fu7X4L0LiZJl_2sLMR3S2IYFv-2Ptjlh7rKo81mW-lXRs1Fq_KnzbXX67wRujmQ8l18GUPxBbAsQzB3UIv9MKg"}`,
-            }
-        })
+        const response = await backEndApi.post('/slips/verify', formData)
 
         if (response) {
             await fetchOrders();
@@ -64,12 +54,14 @@ const submitForm = async () => {
         alert('Error uploading file.')
     }
 }
+
 </script>
+
 
 <template>
     <div class="max-w-3xl flex flex-col justify-between mx-auto">
         <ProfileCard />
-        <div v-if="orderRef?.status !== 'paid'">
+        <div v-if="orderRef?.status === 'pending'">
             <div class="grid grid-cols-1 gap-4 mx-auto justify-items-center">
                 <img class="max-h-[30rem]  object-contain"
                     src="https://www.scb.co.th/content/media/personal-banking/digital-banking/scb-easy/how-to/qr-code/qr-code-generated-7.jpg"
@@ -92,8 +84,11 @@ const submitForm = async () => {
             </div>
         </div>
 
-        <div v-else>
-            <p>สั่งซื้อสำเร็จ</p>
+        <div v-if="orderRef?.status === 'success'" class="h-[690px]">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+                <h2 class="text-xl font-bold text-green-600 mb-4">สั่งซื้อสำเร็จ!</h2>
+                <p class="text-gray-700 mb-6">ขอบคุณที่สั่งซื้อสินค้ากับเรา 🎉</p>
+            </div>
         </div>
     </div>
 </template>
