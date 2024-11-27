@@ -1,4 +1,5 @@
 import useLiff from '@/hook/liff'
+import { backEndApi } from '@/services/axios'
 import { defineStore } from 'pinia'
 
 export const accessTokenStore = defineStore('accessToken', {
@@ -16,6 +17,9 @@ export const accessTokenStore = defineStore('accessToken', {
           this.isLoading = false
           return
         }
+        await backEndApi.post(
+          '/users/login-line',
+        )
         this.accessToken = liff.getIDToken() || ''
         this.expiresAt = Date.now() + 55 * 60 * 1000
       } catch (error) {
