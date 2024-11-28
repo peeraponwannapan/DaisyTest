@@ -12,7 +12,8 @@ onMounted(async () => {
   // Fetch profile and ID token before setting up interceptors
   await profileStore.fetchProfile()
   await accessToken.getIDToken()
-
+  console.log("Profile and ID Token fetched successfully");
+  console.log("Access Token:", accessToken.accessToken);
   // Setup Axios interceptors after initialization
   setupAxiosInterceptors()
 })
