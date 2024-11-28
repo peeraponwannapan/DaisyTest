@@ -1,4 +1,4 @@
-import { backEndApi } from '@/services/axios'
+import { backEndApi } from '@/services/axios';
 import liff, { type Liff } from '@line/liff'
 import { decodeJwt } from 'jose'
 import moment from 'moment'
@@ -19,23 +19,21 @@ const useLiff = async (
       const getTokenId = liff?.getIDToken() || ''
       const decode = decodeJwt(getTokenId)
       const dateToCheck = moment.unix(decode?.exp as number)
+      console.log(getTokenId)
       if (decode && !dateToCheck.isAfter(moment())) {
-        console.log(decode, dateToCheck)
         liff.logout()
       }
-      try {
-        await backEndApi.post(
-          '/users/login-line',
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${getTokenId} `,
-            },
+      await backEndApi.post(
+        '/users/login-line',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${getTokenId} `,
           },
-        )
-      } finally {
-        return { liff: liffInstance, error }
-      }
+        },
+      )
+      return { liff: liffInstance, error }
+
     })
     .catch(err => {
       // Handle error during initialization
