@@ -17,23 +17,11 @@
 </template>
 
 <script lang="ts">
-import { accessTokenStore } from '@/stores/useAccessTokenLine';
 import { useProfileStore } from '@/stores/useProfileStore';
-import { onMounted } from 'vue';
 
 export default {
     setup() {
         const profileStore = useProfileStore();
-        const accessToken = accessTokenStore();
-        onMounted(async () => {
-            await profileStore.fetchProfile()
-            await accessToken.getIDToken()
-            if (accessToken.isTokenExpired()) {
-                console.log(accessToken.isTokenExpired())
-                console.log('Token has expired')
-                await accessToken.clearToken()
-            }
-        });
 
         return { profileStore };
     },
