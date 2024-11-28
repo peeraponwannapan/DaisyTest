@@ -6,13 +6,10 @@ import { useProfileStore } from './stores/useProfileStore';
 const accessToken = accessTokenStore();
 const profileStore = useProfileStore();
 
-        onMounted(async () => {
-            await profileStore.fetchProfile()
-            await accessToken.getIDToken()
-            if (accessToken.isTokenExpired()) {
-                await accessToken.clearToken()
-            }
-        });
+onMounted(async () => {
+  await profileStore.fetchProfile()
+  await accessToken.getIDToken()
+});
 </script>
 
 <template>
