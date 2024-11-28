@@ -19,7 +19,6 @@ const useLiff = async (
       const getTokenId = liff?.getIDToken() || ''
       const decode = decodeJwt(getTokenId)
       const dateToCheck = moment.unix(decode?.exp as number)
-      console.log(getTokenId)
       if (decode && !dateToCheck.isAfter(moment())) {
         liff.logout()
       }
