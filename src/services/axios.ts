@@ -4,10 +4,12 @@ import axios from 'axios'
 
 export const backEndApi = axios.create({ baseURL: baseAPIURL })
 
-backEndApi.interceptors.request.use((config) => {
+backEndApi.interceptors.request.use(async (config) => {
     const getAccessToken = accessTokenStore();
+    await getAccessToken.getIDToken(); // เรียกฟังก์ชันโหลด token
+    const token = getAccessToken?.accessToken;
     if (getAccessToken) {
-      config.headers.Authorization = `Bearer ${getAccessToken?.accessToken}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   }, (error) => {
