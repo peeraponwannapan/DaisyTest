@@ -1,5 +1,5 @@
 import useLiff from '@/hook/liff'
-import { backEndApi } from '@/services/axios'
+import setupAxiosInterceptors, { backEndApi } from '@/services/axios'
 import { defineStore } from 'pinia'
 
 export const accessTokenStore = defineStore('accessToken', {
@@ -17,10 +17,12 @@ export const accessTokenStore = defineStore('accessToken', {
           this.isLoading = false
           return
         }
+        this.accessToken = liff.getIDToken() || ''
+        setupAxiosInterceptors(this.accessToken)
+        console.log(this.accessToken,'this.accessToken')
         await backEndApi.post(
           '/users/login-line',
         )
-        this.accessToken = liff.getIDToken() || ''
         this.expiresAt = Date.now() + 55 * 60 * 1000
       } catch (error) {
         console.error('Error fetching profile:', error)

@@ -3,7 +3,6 @@ import { onMounted } from 'vue';
 import { RouterView } from 'vue-router'
 import { accessTokenStore } from './stores/useAccessTokenLine';
 import { useProfileStore } from './stores/useProfileStore';
-import setupAxiosInterceptors from './services/axios';
 
 onMounted(async () => {
   const accessToken = accessTokenStore()
@@ -15,7 +14,7 @@ onMounted(async () => {
   console.log("Profile and ID Token fetched successfully");
   console.log("Access Token:", accessToken.accessToken);
   // Setup Axios interceptors after initialization
-  setupAxiosInterceptors()
+
 })
 </script>
 

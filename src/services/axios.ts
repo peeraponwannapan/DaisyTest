@@ -4,12 +4,12 @@ import axios from 'axios'
 
 export const backEndApi = axios.create({ baseURL: baseAPIURL })
 
-export default function setupAxiosInterceptors() {
+export default function setupAxiosInterceptors(getAccessTokenFromMiddleware: string) {
   backEndApi.interceptors.request.use(
     config => {
       const getAccessToken = accessTokenStore()
-      const token = getAccessToken?.accessToken
-      if (getAccessToken) {
+      const token = getAccessTokenFromMiddleware || getAccessToken?.accessToken
+      if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
       return config
