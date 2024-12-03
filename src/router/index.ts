@@ -37,7 +37,7 @@ router.beforeEach(async (to, from, next) => {
       return;
     }
   }
-  console.log("Access Token:", accessToken.accessToken);
+  alert(accessToken.accessToken)
   next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
 });
 
