@@ -13,6 +13,7 @@ export const accessTokenStore = defineStore('accessToken', {
       this.isLoading = true
       const { liff } = await useLiff()
       try {
+        alert(liff)
         if (!liff) {
           this.isLoading = false
           return
