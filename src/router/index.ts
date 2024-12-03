@@ -27,6 +27,9 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const accessToken = accessTokenStore();
+  if (to.path === '/') {
+    return next(); 
+  }
   if (!accessToken.accessToken) {
     try {
       await accessToken.getIDToken();
