@@ -15,6 +15,7 @@ export default function setupAxiosInterceptors(getAccessTokenFromMiddleware: str
       return config
     },
     error => {
+      alert(error)
       return Promise.reject(error)
     },
   )
