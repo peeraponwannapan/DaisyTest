@@ -27,18 +27,16 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const accessToken = accessTokenStore();
-  alert(`access: ${accessToken.accessToken}`)
+  if (to.path === '/') {
+    return next();
+  }
   if (!accessToken.accessToken) {
     try {
-      alert(`accessTrue: ${accessToken.accessToken}`)
       await accessToken.getIDToken();
-      alert("Profile and ID Token fetched successfully");
     } catch (err) {
       console.error("Error fetching ID Token:", err);
       return;
     }
-  }else{
-    alert(`accessElse: ${accessToken.accessToken}`)
   }
   return next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
 });

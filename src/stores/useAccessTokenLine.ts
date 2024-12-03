@@ -11,9 +11,7 @@ export const accessTokenStore = defineStore('accessToken', {
   actions: {
     async getIDToken() {
       this.isLoading = true
-      alert("Check")
       const { liff } = await useLiff()
-      alert(`Check,:${liff}`)
 
       try {
         if (!liff) {
