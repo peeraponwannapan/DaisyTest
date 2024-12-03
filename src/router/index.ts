@@ -29,8 +29,8 @@ router.beforeEach(async (to, from, next) => {
   const accessToken = accessTokenStore();
   alert(`access: ${accessToken.accessToken}`)
   if (!accessToken.accessToken) {
-    alert(`accessTrue: ${accessToken.accessToken}`)
     try {
+      alert(`accessTrue: ${accessToken.accessToken}`)
       await accessToken.getIDToken();
       alert("Profile and ID Token fetched successfully");
     } catch (err) {
