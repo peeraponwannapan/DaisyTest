@@ -35,7 +35,6 @@ router.beforeEach(async (to, from, next) => {
     } catch (err) {
       alert(err)
       console.error("Error fetching ID Token:", err);
-      next('/error'); // เปลี่ยนเส้นทางไปยังหน้า error
       return;
     }
   }
