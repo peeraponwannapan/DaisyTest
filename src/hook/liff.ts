@@ -13,6 +13,7 @@ const useLiff = async (
     .init({ liffId })
     .then(async () => {
       liffInstance = liff
+      alert(liff.isLoggedIn())
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
@@ -38,7 +39,7 @@ const useLiff = async (
     .catch(err => {
       // Handle error during initialization
       error = err
-      console.log(err.code, err.message)
+      alert(err)
       return { liff: null, error }
     })
 }
