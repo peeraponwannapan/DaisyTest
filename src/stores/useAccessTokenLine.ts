@@ -20,7 +20,7 @@ export const accessTokenStore = defineStore('accessToken', {
         }
         this.accessToken = liff.getIDToken() || ''
         setupAxiosInterceptors(this.accessToken)
-        this.expiresAt = Date.now() + 55 * 60 * 1000
+        return
       } catch (error) {
         console.error('Error fetching profile:', error)
       } finally {
