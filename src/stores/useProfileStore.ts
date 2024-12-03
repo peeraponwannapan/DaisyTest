@@ -14,6 +14,7 @@ export const useProfileStore = defineStore('profile', {
     async fetchProfile() {
       this.isLoading = true
       const { liff } = await useLiff()
+      alert(`"lineProfile"${liff}`)
       try {
         if (!liff) {
           this.isLoading = false
