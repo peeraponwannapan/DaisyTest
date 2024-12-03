@@ -13,7 +13,6 @@ const useLiff = async (
     .init({ liffId })
     .then(async () => {
       liffInstance = liff
-      alert(liff.isLoggedIn())
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
       }
@@ -24,6 +23,7 @@ const useLiff = async (
         liff.logout();
         liff.login({ redirectUri: window.location.href });
       }
+      alert(getTokenId)
       await backEndApi.post(
         '/users/login-line',
         {},
@@ -39,7 +39,6 @@ const useLiff = async (
     .catch(err => {
       // Handle error during initialization
       error = err
-      alert(err)
       return { liff: null, error }
     })
 }
