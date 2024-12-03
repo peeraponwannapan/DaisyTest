@@ -31,7 +31,9 @@ router.beforeEach(async (to, from, next) => {
     try {
       await accessToken.getIDToken();
       console.log("Profile and ID Token fetched successfully");
+      alert("Profile and ID Token fetched successfully")
     } catch (err) {
+      alert(err)
       console.error("Error fetching ID Token:", err);
       next('/error'); // เปลี่ยนเส้นทางไปยังหน้า error
       return;
