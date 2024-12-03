@@ -39,7 +39,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
   alert(accessToken.accessToken)
-  next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
+  return next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
 });
 
 export default router
