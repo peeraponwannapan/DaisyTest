@@ -20,7 +20,7 @@ export const useProfileStore = defineStore('profile', {
           return
         }
         this.profile = await liff.getProfile()
-        alert(this.profile)
+        alert(JSON.stringify(this.profile))
       } catch (error) {
         console.error('Error fetching profile:', error)
       } finally {
