@@ -30,17 +30,15 @@ router.beforeEach(async (to, from, next) => {
   alert(`access: ${accessToken.accessToken}`)
   if (!accessToken.accessToken) {
     alert(`accessTrue: ${accessToken.accessToken}`)
-
     try {
       await accessToken.getIDToken();
-      console.log("Profile and ID Token fetched successfully");
+      alert("Profile and ID Token fetched successfully");
     } catch (err) {
       console.error("Error fetching ID Token:", err);
       return;
     }
   }else{
     alert(`accessElse: ${accessToken.accessToken}`)
-
   }
   return next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
 });
