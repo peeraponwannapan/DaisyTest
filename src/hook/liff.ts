@@ -10,7 +10,7 @@ const useLiff = async (
   let liffInstance: Liff | null = null
 
   return liff
-    .init({ liffId: liffId })
+    .init({ liffId })
     .then(async () => {
       liffInstance = liff
       if (!liff.isLoggedIn()) {
@@ -20,7 +20,8 @@ const useLiff = async (
       const decode = decodeJwt(getTokenId)
       const dateToCheck = moment.unix(decode?.exp as number)
       if (decode && !dateToCheck.isAfter(moment())) {
-        liff.logout()
+        liff.logout();
+        liff.login({ redirectUri: window.location.href });
       }
       await backEndApi.post(
         '/users/login-line',
