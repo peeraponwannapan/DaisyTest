@@ -14,13 +14,13 @@ export const useProfileStore = defineStore('profile', {
     async fetchProfile() {
       this.isLoading = true
       const { liff } = await useLiff()
-      alert(`"lineProfile"${liff}`)
       try {
         if (!liff) {
           this.isLoading = false
           return
         }
         this.profile = await liff.getProfile()
+        alert(this.profile)
       } catch (error) {
         console.error('Error fetching profile:', error)
       } finally {
