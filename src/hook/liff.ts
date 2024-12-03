@@ -8,11 +8,9 @@ const useLiff = async (
 ): Promise<{ liff: Liff | null; error: Error | null }> => {
   let error: Error | null = null
   let liffInstance: Liff | null = null
-  alert(liffId)
   return liff
     .init({ liffId })
     .then(async () => {
-      alert("liffId")
       liffInstance = liff
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: window.location.href })
