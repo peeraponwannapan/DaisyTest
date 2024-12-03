@@ -23,7 +23,6 @@ const useLiff = async (
         liff.logout();
         liff.login({ redirectUri: window.location.href });
       }
-      alert(getTokenId)
       await backEndApi.post(
         '/users/login-line',
         {},

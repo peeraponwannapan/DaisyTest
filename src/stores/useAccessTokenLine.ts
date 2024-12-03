@@ -14,7 +14,6 @@ export const accessTokenStore = defineStore('accessToken', {
       const { liff } = await useLiff()
 
       try {
-        alert(liff)
         if (!liff) {
           this.isLoading = false
           return
