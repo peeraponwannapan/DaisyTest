@@ -28,7 +28,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const accessToken = accessTokenStore();
   if (to.path === '/') {
-    return next();
+    next();
   }
   if (!accessToken.accessToken) {
     try {
@@ -38,7 +38,7 @@ router.beforeEach(async (to, from, next) => {
       return;
     }
   }
-  return next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
+  next(); // อนุญาตให้ไปยังเส้นทางที่ร้องขอ
 });
 
 export default router

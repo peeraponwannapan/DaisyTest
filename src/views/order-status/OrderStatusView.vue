@@ -43,15 +43,14 @@ const submitForm = async () => {
         // Replace 'YOUR_API_ENDPOINT' with the actual API URL
         const response = await backEndApi.post('/slips/verify', formData)
 
-        if (response) {
-            await fetchOrders();
+        if(response){
             alert('File uploaded successfully!')
-        } else {
-            alert('File upload failed.')
         }
-    } catch (error) {
-        console.error('Error uploading file:', error)
-        alert('Error uploading file.')
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+        const messageError = error.response.data.message
+        alert(messageError)
     }
 }
 
@@ -59,6 +58,7 @@ const submitForm = async () => {
 
 
 <template>
+    <a-spin />
     <div class="max-w-3xl flex flex-col justify-between mx-auto">
         <ProfileCard />
         <div v-if="orderRef?.status === 'pending'">
