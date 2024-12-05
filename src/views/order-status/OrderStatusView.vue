@@ -45,6 +45,7 @@ const submitForm = async () => {
 
         if(response){
             alert('File uploaded successfully!')
+            await fetchOrders()
         }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
