@@ -11,24 +11,72 @@
           <span class="priceText">{{ item.price }} bath / {{ item.expiredDate }} days</span>
         </div>
       </div>
-      <div v-if="selectedItem" class="fixed bottom-0 left-0 right-0 mx-auto bg-white p-4 shadow-lg max-w-3xl">
-        <div class="flex items-center justify-center font-bold text-lg mb-2">
-          สรุปคำสั่งซื้อ
-        </div>
-        <div class="flex justify-between">
-          <div>
-            <div>สินค้า</div> <!-- Label for product -->
-            <div class="font-semibold">{{ selectedItem?.name }}</div> <!-- Product name below the label -->
+      <div v-if="selectedItem" class="fixed inset-0 z-50 overflow-y-auto">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity" @click="closeModal"></div>
+
+        <!-- Modal -->
+        <div class="flex items-center justify-center h-screen p-4 bg-black/50">
+          <div class="relative bg-white rounded-lg shadow-xl max-w-3xl w-full">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 border-b">
+              <h3 class="text-lg font-bold text-center flex-grow">
+                รายละเอียดสินค้า
+              </h3>
+              <button @click="closeModal" class="text-gray-500 hover:text-gray-700">
+                <span class="text-2xl">&times;</span>
+              </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-4">
+              <div class="flex flex-col md:flex-row gap-6">
+                <!-- Product Image -->
+                <div class="w-full md:w-1/2">
+                  <div class="relative aspect-square rounded-lg overflow-hidden">
+                    <img :src="selectedItem?.productType.image || '/placeholder-image.jpg'" :alt="selectedItem?.name"
+                      class="object-cover w-full h-full" />
+                  </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="w-full md:w-1/2">
+                  <div class="space-y-4">
+                    <!-- Product Name and Price -->
+                    <div>
+                      <div class="text-gray-600">สินค้า</div>
+                      <div class="font-semibold text-xl">{{ selectedItem?.name }}</div>
+                    </div>
+                    <div>
+                      <div class="text-gray-600">ราคา</div>
+                      <div class="font-semibold text-2xl text-red-600">{{ selectedItem?.price }} ฿</div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="border-t pt-4" v-if="selectedItem?.productType.condition">
+                      <h3 class="font-semibold mb-2">รายละเอียดสินค้า</h3>
+                      <p class="text-sm text-gray-600">
+                        {{ selectedItem.productType.condition }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal Footer -->
+              <div class="border-t pt-3 mt-4">
+                <div class="flex justify-end space-x-2">
+                  <button @click="closeModal" class="px-4 py-2 text-gray-600 rounded hover:bg-gray-100">
+                    ยกเลิก
+                  </button>
+                  <button @click="purchaseButton(selectedItem?.id)"
+                    class="bg-[#cee5ed] hover:bg-[#d9f2fa] text-white font-bold py-2 px-4 rounded">
+                    สั่งซื้อ
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <div>ราคา</div> <!-- Label for price -->
-            <div class="font-semibold">{{ selectedItem?.price }} ฿</div> <!-- Price below the label -->
-          </div>
-        </div>
-        <hr class="my-3">
-        <div class="float-right">
-          <button class="bg-[#cee5ed] hover:bg-[#d9f2fa] text-white font-bold py-2 px-4 rounded"
-            @click="purchaseButton(selectedItem.id)">สั่งซื้อ</button>
         </div>
       </div>
     </div>
@@ -81,5 +129,8 @@ const purchaseButton = async (productId: number) => {
 }
 function selectItem(value: Product) {
   selectedItem.value = value;
+}
+const closeModal = () => {
+  selectedItem.value = undefined
 }
 </script>

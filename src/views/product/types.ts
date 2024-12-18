@@ -9,4 +9,6 @@ export interface Product {
 export interface ProductType {
   id: number
   name: string
+  image: string
+  condition: string
 }
