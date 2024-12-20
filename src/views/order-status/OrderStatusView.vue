@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import { useRoute } from 'vue-router'
-import ProfileCard from '../components/ProfileCard.vue';
 import { onMounted, ref } from 'vue';
 import { backEndApi } from '@/services/axios';
 import type { Orders } from './types';
@@ -43,12 +42,12 @@ const submitForm = async () => {
         // Replace 'YOUR_API_ENDPOINT' with the actual API URL
         const response = await backEndApi.post('/slips/verify', formData)
 
-        if(response){
+        if (response) {
             alert('File uploaded successfully!')
             await fetchOrders()
         }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         const messageError = error.response.data.message
         alert(messageError)
@@ -61,7 +60,6 @@ const submitForm = async () => {
 <template>
     <a-spin />
     <div class="max-w-3xl flex flex-col justify-between mx-auto">
-        <ProfileCard />
         <div v-if="orderRef?.status === 'pending'">
             <div class="grid grid-cols-1 gap-4 mx-auto justify-items-center">
                 <img class="max-h-[30rem]  object-contain"
