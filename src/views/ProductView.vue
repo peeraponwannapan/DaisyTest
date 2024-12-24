@@ -65,11 +65,13 @@
             <div class="flex justify-between items-center">
               <!-- Quantity controls on the left -->
               <div class="flex items-center space-x-2">
-                <button @click="decreaseQuantity" class="px-3 py-1 text-gray-600 border rounded hover:bg-gray-100">
+                <button @click="decreaseQuantity"
+                  class="touch-none px-3 py-1 text-gray-600 border rounded hover:bg-gray-100">
                   -
                 </button>
                 <span class="w-12 text-center">{{ quantity }}</span>
-                <button @click="increaseQuantity" class="px-3 py-1 text-gray-600 border rounded hover:bg-gray-100">
+                <button @click="increaseQuantity"
+                  class="touch-none px-3 py-1 text-gray-600 border rounded hover:bg-gray-100">
                   +
                 </button>
               </div>
@@ -97,7 +99,6 @@
 
 .priceText {
   font-size: 20px;
-  font-family: "Arima", system-ui;
   font-weight: 700;
   padding-top: 10px;
 }
@@ -131,7 +132,7 @@ onMounted(async () => {
 })
 
 const purchaseButton = async (productId: number) => {
-  const { data: response } = await backEndApi.post(`/orders`, { productId })
+  const { data: response } = await backEndApi.post(`/orders`, { productId, quantity: quantity.value })
   if (response) {
     router.push(`/order-status/${response.refId}`)
   }
