@@ -8,7 +8,7 @@
       <span class="priceText">{{ item.price }} bath / {{ item.expiredDate }} days</span>
     </div>
   </div>
-  <div v-if="selectedItem" class="fixed inset-0 z-50 overflow-y-auto">
+  <div v-if="selectedItem" class="fixed inset-0 z-50 overflow-y-auto touch-none">
     <!-- Backdrop -->
     <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
 
